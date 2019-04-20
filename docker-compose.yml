@@ -11,6 +11,8 @@ services:
       - BACKEND_URL=https://atacadogames.tk
       - APIPREFIX=/api/v1
       - NODE_ENV=dev
+    links:
+      - db
     networks:
       - backend
   db:

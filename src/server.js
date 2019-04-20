@@ -13,10 +13,15 @@ class App {
   }
 
   database () {
-    mongoose.connect(dbConfig.uri, {
-      useCreateIndex: true,
-      useNewUrlParser: true
-    })
+    mongoose
+      .connect(dbConfig.uri, {
+        useCreateIndex: true,
+        useNewUrlParser: true
+      })
+      .catch(err => {
+        console.log('error al conectar a la db')
+        console.log(err)
+      })
   }
 
   middlewares () {
