@@ -1,8 +1,9 @@
-# Estructura de node js
+# App Marketplace
 
-_Estructura para comenzar algun proyecto y no tener que estar escribiendolo desde cero_
+_App_
 
 ## Comenzando 🚀
+
 _Para corre el proyecto es bien simple_
 
 ### Instalación 🔧

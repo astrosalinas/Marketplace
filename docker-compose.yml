@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - '5000:5000'
+    volumes:
+      - .:/usr/src
+    environment:
+      - BACKEND_URL=https://atacadogames.tk
+      - APIPREFIX=/api/v1
+      - NODE_ENV=dev
+    networks:
+      - backend
+  db:
+    image: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodata:/data/db
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  mongodata:
+
