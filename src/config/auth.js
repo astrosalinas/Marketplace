@@ -1,4 +1,4 @@
 module.exports = {
-  secret: 'GoNode03',
-  ttl: 8640000000
+  secret: process.env.APP_SECRET,
+  ttl: process.env.TTL
 }

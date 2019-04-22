@@ -1,3 +1,3 @@
 module.exports = {
-  uri: 'mongodb://db:27017/gonode03'
+  uri: process.env.DB_URL
 }
