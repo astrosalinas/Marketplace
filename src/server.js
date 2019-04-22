@@ -2,6 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const dbConfig = require('./config/database')
 
+const swaggerDoc = require('./swaggerDoc')
+
 class App {
   constructor () {
     this.express = express()
@@ -27,6 +29,7 @@ class App {
 
   middlewares () {
     this.express.use(express.json())
+    swaggerDoc(this.express)
   }
 
   routes () {

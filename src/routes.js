@@ -12,6 +12,12 @@ routes.post('/sessions', controllers.SessionController.store)
 routes.use(authMiddleware)
 
 /* Ads */
+/*
+ * @swagger
+ * /ads:
+ *   get:
+ *     description: teste
+ */
 routes.get('/ads', controllers.AdController.index)
 routes.get('/ads/:id', controllers.AdController.show)
 routes.post('/ads', controllers.AdController.store)
