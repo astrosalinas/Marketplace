@@ -12,11 +12,11 @@ const Ad = new mongoose.Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    require: true
+    required: true
   },
   price: {
     type: Number,
-    require: true
+    required: true
   },
   createdAt: {
     type: Date,

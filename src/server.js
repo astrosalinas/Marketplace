@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const dbConfig = require('./config/database')
 
+mongoose.set('useFindAndModify', false)
 class App {
   constructor () {
     this.express = express()
