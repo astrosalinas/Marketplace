@@ -2,7 +2,9 @@ const Ad = require('../models/Ad')
 
 class AdController {
   async index (req, res) {
-    const filters = {}
+    const filters = {
+      purchasedBy: null
+    }
 
     if (req.query.price_min || req.query.price_max) {
       filters.price = {}
@@ -37,18 +39,9 @@ class AdController {
   }
 
   async store (req, res) {
-    try {
-      const ad = await Ad.create({ ...req.body, author: req.userId })
-      return res.json(ad)
-    } catch (err) {
-      const error = Object.keys(err.errors)
+    const ad = await Ad.create({ ...req.body, author: req.userId })
 
-      if (error[0]) {
-        return res.status(400).json({ error: err.errors[error[0]].message })
-      } else {
-        return res.status(400).json({ error: 'Error in format' })
-      }
-    }
+    return res.json(ad)
   }
 
   async update (req, res) {
