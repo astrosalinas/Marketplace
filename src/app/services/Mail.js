@@ -8,13 +8,25 @@ const mailConfig = require('../../config/mail')
 
 const transport = nodemailer.createTransport(mailConfig)
 
+var options = {
+  viewEngine: {
+    extname: '.hbs',
+    layoutsDir: '../views/emails/',
+    defaultLayout: 'template',
+    partialsDir: '../views/emails/'
+  },
+  viewPath: '../views/emails/',
+  extName: '.hbs'
+}
+
 transport.use(
   'compile',
-  hbs({
-    viewEngine: exphbs(),
-    viewPath: path.resolve(__dirname, '..', 'views', 'emails'),
-    extName: '.hbs'
-  })
+  hbs(options)
+  //   {
+  //   viewEngine: exphbs(),
+  //   viewPath: path.resolve(__dirname, '..', 'views', 'emails'),
+  //   extName: '.hbs'
+  // })
 )
 
 module.exports = transport

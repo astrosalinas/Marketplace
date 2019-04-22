@@ -1,5 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const Youch = require('youch')
+const validate = require('express-validation')
 const dbConfig = require('./config/database')
 
 const swaggerDoc = require('./swaggerDoc')
@@ -12,19 +14,15 @@ class App {
     this.database()
     this.middlewares()
     this.routes()
+    this.exception()
   }
 
   database () {
-    mongoose
-      .connect(dbConfig.uri, {
-        useCreateIndex: true,
-        useNewUrlParser: true,
-        useFindAndModify: false
-      })
-      .catch(err => {
-        console.log('error al conectar a la db')
-        console.log(err)
-      })
+    mongoose.connect(dbConfig.uri, {
+      useCreateIndex: true,
+      useNewUrlParser: true,
+      useFindAndModify: false
+    })
   }
 
   middlewares () {
@@ -34,6 +32,23 @@ class App {
 
   routes () {
     this.express.use(require('./routes'))
+  }
+
+  exception () {
+    this.express.use(async (err, req, res, next) => {
+      if (err instanceof validate.ValidationError) {
+        return res.status(err.status).json(err)
+      }
+
+      if (process.env.NODE_ENV !== 'production') {
+        const youch = new Youch(err, req)
+        return res.json(await youch.toJSON())
+      }
+
+      return res
+        .status(err.status || 500)
+        .json({ error: 'Internal Server Error' })
+    })
   }
 }
 
