@@ -9,10 +9,12 @@ services:
       - .:/usr/src
     environment:
       - BACKEND_URL=https://atacadogames.tk
+      - REDIS_URL=redis://cache
       - APIPREFIX=/api/v1
       - NODE_ENV=dev
     links:
       - db
+      - redis
     networks:
       - backend
   db:
@@ -23,6 +25,17 @@ services:
       - mongodata:/data/db
     networks:
       - backend
+  redis:
+    image: redis:alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    hostname: redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./db/redis-data:/data
+    networks:
+      - backend
+
 
 networks:
   backend:

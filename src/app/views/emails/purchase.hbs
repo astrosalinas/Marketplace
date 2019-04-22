@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <strong>Hola, {{ ad.author.name }}</strong>
+  <p>Usted tiene una solicitud de compra para su anuncio {{ ad.title }}</p>
+  <br />
+  <strong>{{ user.name }} ({{ user.email }})</strong>
+  <p>{{ content }}</p>
+</body>
+
+</html>
